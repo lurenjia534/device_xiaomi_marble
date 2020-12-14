@@ -25,6 +25,8 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.util.Log;
 
+
+import org.pixelexperience.settings.sensors.PickupSensor;
 import org.pixelexperience.settings.sensors.ProximitySensor;
 
 public class DozeService extends Service {
