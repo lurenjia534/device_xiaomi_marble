@@ -18,7 +18,6 @@ package org.pixelexperience.settings.dirac;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.SystemClock;
@@ -27,7 +26,6 @@ import android.media.AudioManager;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
-import android.preference.PreferenceManager;
 import java.util.List;
 
 public class DiracUtils {
@@ -38,25 +36,21 @@ public class DiracUtils {
     private Handler mHandler = new Handler();
     private Context mContext;
 
-    public static void initialize(Context context) {
-        if (!mInitialized) {
-            mContext = context;
-            mMediaSessionManager = (MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE);
-            mDiracSound = new DiracSound(0, 0);
-            mInitialized = true;
+    public DiracUtils(Context context) {
+        mContext = context;
+        mMediaSessionManager = (MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE);
+        mDiracSound = new DiracSound(0, 0);
+    }
+
+    public static synchronized DiracUtils getInstance(Context context) {
+        if (mInstance == null) {
+            mInstance = new DiracUtils(context);
         }
+
+        return mInstance;
     }
 
-    public static void onBootCompleted(Context context) {
-         DiracUtils.initialize(context);
-
-         // Restore selected scene
-         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-         String scene = sharedPrefs.getString(DiracSettingsFragment.PREF_SCENE, "4" /* smart */);
-         setScenario(Integer.parseInt(scene));
-    }
-
-    private static void triggerPlayPause(MediaController controller) {
+    private void triggerPlayPause(MediaController controller) {
         long when = SystemClock.uptimeMillis();
         final KeyEvent evDownPause = new KeyEvent(when, when, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE, 0);
         final KeyEvent evUpPause = KeyEvent.changeAction(evDownPause, KeyEvent.ACTION_UP);
@@ -96,21 +90,6 @@ public class DiracUtils {
             }
         }
         return PlaybackState.STATE_NONE;
-    }
-
-    private void refreshPlaybackIfNecessary() {
-        if (mMediaSessionManager == null) return;
-
-        final List<MediaController> sessions
-                = mMediaSessionManager.getActiveSessionsForUser(
-                null, UserHandle.ALL);
-        for (MediaController aController : sessions) {
-            if (PlaybackState.STATE_PLAYING ==
-                    getMediaControllerPlaybackState(aController)) {
-                triggerPlayPause(aController);
-                break;
-            }
-        }
     }
 
     public void setEnabled(boolean enable) {
