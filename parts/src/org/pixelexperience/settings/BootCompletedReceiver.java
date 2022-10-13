@@ -20,16 +20,10 @@ package org.pixelexperience.settings;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.IBinder;
 import android.util.Log;
-import android.view.Display.HdrCapabilities;
-import android.view.SurfaceControl;
 
-import org.pixelexperience.settings.camera.NfcCameraService;
 import org.pixelexperience.settings.dirac.DiracUtils;
-import org.pixelexperience.settings.dolby.DolbyUtils;
 import org.pixelexperience.settings.doze.DozeUtils;
-import org.pixelexperience.settings.doze.PocketService;
 import org.pixelexperience.settings.refreshrate.RefreshUtils;
 import org.pixelexperience.settings.thermal.ThermalUtils;
 
@@ -40,29 +34,12 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, Intent intent) {
-        if (!intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) return;
-
         if (DEBUG) Log.d(TAG, "Received boot completed intent");
-
-        // Dolby Atmos
-        DolbyUtils.getInstance(context).onBootCompleted();
-
-        // Doze
+        DiracUtils.onBootCompleted(context);
         DozeUtils.checkDozeService(context);
-
-        // Refresh Rate
         RefreshUtils.initialize(context);
-
-        // Thermal Profiles
         ThermalUtils.startService(context);
 
-        // Pocket
-        PocketService.startService(context);
-
-        // NFC
-        NfcCameraService.startService(context);
-
-        // Override HDR types
         final IBinder displayToken = SurfaceControl.getInternalDisplayToken();
         SurfaceControl.overrideHdrTypes(displayToken, new int[]{
                 HdrCapabilities.HDR_TYPE_DOLBY_VISION, HdrCapabilities.HDR_TYPE_HDR10,
