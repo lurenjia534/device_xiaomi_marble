@@ -53,6 +53,9 @@
 /data/vendor/dolby(/.*)? u:object_r:vendor_data_file:s0
 /vendor/bin/hw/dolbycodec2 u:object_r:vendorcodec_exec:s0
 
+# Fastcharge HAL
+/vendor/bin/hw/vendor\.lineage\.fastcharge@1\.0-service\.xiaomi_marble                                  u:object_r:hal_lineage_fastcharge_default_exec:s0
+
 # Fingerprint
 /dev/goodix_fp u:object_r:vendor_fingerprint_device:s0
 /data/vendor/fpc(/.*)? u:object_r:vendor_fingerprint_data_file:s0
