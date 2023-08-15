@@ -56,95 +56,14 @@ fi
 
 function blob_fixup() {
     case "${1}" in
+    vendor/bin/hw/vendor.qti.hardware.display.composer-service)
+        "${PATCHELF}" --replace-needed "libutils.so" "libutils-v32.so" "${2}"
+        ;;
     vendor/etc/camera/marble*_motiontuning.xml)
         sed -i 's/xml=version/xml\ version/g' "${2}"
         ;;
     vendor/etc/camera/pureView_parameter.xml)
         sed -i "s/=\([0-9]\+\)>/=\"\1\">/g" "${2}"
-        ;;
-    vendor/bin/sensors.qti)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/bin/sensors-qesdk)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib64/libqshcamera.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib64/libsnsdiaglog.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib64/sensors.touch.detect.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib64/sensors.ssc.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib64/libssc.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib64/libsensorcal.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib64/mediadrm/libwvdrmengine.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib64/libsnsapi.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib64/libssccalapi@2.0.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib64/libgnss.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib64/libwvhidl.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib/libsnsdiaglog.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib/sensors.touch.detect.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib/sensors.ssc.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib/libssc.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib/libsensorcal.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib/mediadrm/libwvdrmengine.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib/libsnsapi.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib/libssccalapi@2.0.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/lib/libgnss.so)
-        "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite-3.9.1.so" "libprotobuf-cpp-full-3.9.1.so" "${2}"
-        ;;
-    vendor/bin/hw/android.hardware.security.keymint-service-qti)
-        "${PATCHELF}" --replace-needed "android.hardware.security.keymint-V1-ndk_platform.so" "android.hardware.security.keymint-V1-ndk.so" "${2}"
-        "${PATCHELF}" --replace-needed "android.hardware.security.secureclock-V1-ndk_platform.so" "android.hardware.security.secureclock-V1-ndk.so" "${2}"
-        "${PATCHELF}" --replace-needed "android.hardware.security.sharedsecret-V1-ndk_platform.so" "android.hardware.security.sharedsecret-V1-ndk.so" "${2}"
-        "${PATCHELF}" --add-needed "android.hardware.security.rkp-V1-ndk.so" "${2}"
-        ;;
-    vendor/lib64/libqtikeymint.so)
-        "${PATCHELF}" --replace-needed "android.hardware.security.keymint-V1-ndk_platform.so" "android.hardware.security.keymint-V1-ndk.so" "${2}"
-        "${PATCHELF}" --replace-needed "android.hardware.security.secureclock-V1-ndk_platform.so" "android.hardware.security.secureclock-V1-ndk.so" "${2}"
-        "${PATCHELF}" --replace-needed "android.hardware.security.sharedsecret-V1-ndk_platform.so" "android.hardware.security.sharedsecret-V1-ndk.so" "${2}"
-        "${PATCHELF}" --add-needed "android.hardware.security.rkp-V1-ndk.so" "${2}"
-        ;;
-    vendor/lib64/libcamximageformatutils.so)
-        "${PATCHELF}" --replace-needed "vendor.qti.hardware.display.config-V2-ndk_platform.so" "vendor.qti.hardware.display.config-V2-ndk.so" "${2}"
-        ;;
-    vendor/lib64/vendor.qti.hardware.qxr-V1-ndk_platform.so)
-        "${PATCHELF}" --replace-needed "android.hardware.common-V2-ndk_platform.so" "android.hardware.common-V2-ndk.so" "${2}"
         ;;
     esac
 }
