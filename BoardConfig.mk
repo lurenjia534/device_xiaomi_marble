@@ -260,24 +260,6 @@ BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 2
 
-# VINTF
-DEVICE_MATRIX_FILE := $(CONFIGS_PATH)/vintf/compatibility_matrix.xml
-DEVICE_MANIFEST_SKUS := ukee
-DEVICE_MANIFEST_UKEE_FILES := \
-    $(CONFIGS_PATH)/vintf/manifest_ukee.xml \
-    $(CONFIGS_PATH)/vintf/manifest_xiaomi.xml
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
-    $(CONFIGS_PATH)/vintf/vendor_framework_compatibility_matrix.xml \
-    $(CONFIGS_PATH)/vintf/xiaomi_framework_compatibility_matrix.xml \
-    vendor/aosp/config/device_framework_matrix.xml
-ODM_MANIFEST_SKUS += marble
-ODM_MANIFEST_MARBLE_FILES := $(CONFIGS_PATH)/vintf/manifest_nfc.xml
-
-# Dolby Vision
-SOONG_CONFIG_NAMESPACES += dolby_vision
-SOONG_CONFIG_dolby_vision += enabled
-SOONG_CONFIG_dolby_vision_enabled := true
-
 # Vibrator
 SOONG_CONFIG_NAMESPACES += XIAOMI_VIBRATOR
 SOONG_CONFIG_XIAOMI_VIBRATOR := USE_EFFECT_STREAM
