@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.Display.HdrCapabilities;
 import android.view.SurfaceControl;
 
+import org.pixelexperience.settings.dirac.DiracUtils;
 import org.pixelexperience.settings.doze.DozeUtils;
 import org.pixelexperience.settings.refreshrate.RefreshUtils;
 import org.pixelexperience.settings.thermal.ThermalUtils;
@@ -41,6 +42,16 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         }
         if (DEBUG)
             Log.d(TAG, "Received boot completed intent");
+
+        // Dirac
+        // try {
+        //    DiracUtils.getInstance(context);
+        // } catch (Exception e) {
+        //    Log.d(TAG, "Dirac is not present in system");
+        // }
+
+        // Dolby Atmos
+        DolbyUtils.getInstance(context).onBootCompleted();
 
         // Doze
         DozeUtils.checkDozeService(context);

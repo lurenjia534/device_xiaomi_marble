@@ -51,7 +51,7 @@
 
 # Dolby
 /data/vendor/dolby(/.*)? u:object_r:vendor_data_file:s0
-/vendor/bin/hw/dolbycodec2 u:object_r:vendorcodec_exec:s0
+/vendor/bin/hw/dolbycodec2                                                u:object_r:mediacodec_exec:s0
 
 # Fastcharge HAL
 /(vendor|system/vendor)/bin/hw/vendor\.lineage\.fastcharge@[0-9]\.[0-9]-service\.xiaomi_marble          u:object_r:hal_lineage_fastcharge_default_exec:s0
