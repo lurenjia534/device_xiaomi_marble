@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.lineageos.settings.dolby;
+package org.pixelexperience.settings.dolby;
 
 import android.content.Context;
 import android.content.Intent;
