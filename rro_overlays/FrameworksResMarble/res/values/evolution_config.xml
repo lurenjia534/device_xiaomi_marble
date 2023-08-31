@@ -51,4 +51,10 @@
     <!-- Pocket Lock -->
     <bool name="config_pocketModeSupported">true</bool>
     <bool name="config_pocketUseLightSensor">false</bool>
+
+    <!-- Smart charging -->
+    <bool name="config_smartChargingAvailable">true</bool>
+    <string name="config_SmartChargingSysfsNode" translatable="false">/sys/class/qcom-battery/input_suspend</string>
+    <string name="config_SmartChargingSuspendValue" translatable="false">1</string>
+    <string name="config_SmartChargingResumeValue" translatable="false">0</string>
 </resources>
