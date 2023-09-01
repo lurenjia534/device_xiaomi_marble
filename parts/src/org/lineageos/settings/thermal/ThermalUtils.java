@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The lineageos Project
+ * Copyright (C) 2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,12 @@ package org.pixelexperience.settings.thermal;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.RemoteException;
+import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.view.Display;
+import android.view.Surface;
+import android.view.WindowManager;
 
 import androidx.preference.PreferenceManager;
 
@@ -52,12 +57,16 @@ public final class ThermalUtils {
     private static final String THERMAL_GAMING = "thermal.gaming=";
     private static final String THERMAL_STREAMING = "thermal.streaming=";
 
-    private static final String THERMAL_SCONFIG = "/sys/class/thermal/thermal_message/sconfig";
+    private static final String THERMAL_SCONFIG = "/sys/devices/virtual/thermal/thermal_message/sconfig";
 
+    private Display mDisplay;
     private SharedPreferences mSharedPrefs;
 
     protected ThermalUtils(Context context) {
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        WindowManager mWindowManager = context.getSystemService(WindowManager.class);
+        mDisplay = mWindowManager.getDefaultDisplay();
     }
 
     public static void startService(Context context) {
@@ -132,6 +141,10 @@ public final class ThermalUtils {
         }
 
         return state;
+    }
+
+    protected void setDefaultThermalProfile() {
+        FileUtils.writeLine(THERMAL_SCONFIG, THERMAL_STATE_DEFAULT);
     }
 
     protected void setThermalProfile(String packageName) {
