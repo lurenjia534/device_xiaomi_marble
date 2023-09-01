@@ -1,3 +1,19 @@
+-keep class org.pixelexperience.settings.* {
+  *;
+}
+
+-keep class org.pixelexperience.settings.dirac.* {
+  *;
+}
+
 -keep class org.pixelexperience.settings.doze.* {
+  *;
+}
+
+-keep class org.pixelexperience.settings.speaker.* {
+  *;
+}
+
+-keep class org.pixelexperience.settings.thermal.* {
   *;
 }
