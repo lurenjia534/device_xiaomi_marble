@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2015 The CyanogenMod Project
- *               2017-2020 The lineageos Project
+ *               2017-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import android.view.Display.HdrCapabilities;
 import android.view.SurfaceControl;
 
 import org.pixelexperience.settings.dirac.DiracUtils;
+import org.pixelexperience.settings.dolby.DolbyUtils;
 import org.pixelexperience.settings.doze.DozeUtils;
 import org.pixelexperience.settings.refreshrate.RefreshUtils;
 import org.pixelexperience.settings.thermal.ThermalUtils;
