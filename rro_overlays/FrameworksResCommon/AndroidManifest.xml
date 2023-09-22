@@ -8,5 +8,5 @@
      <application android:allowBackup="false"/>
      <overlay android:targetPackage="android"
           android:isStatic="true"
-          android:priority="550" />
+          android:priority="500" />
 </manifest>

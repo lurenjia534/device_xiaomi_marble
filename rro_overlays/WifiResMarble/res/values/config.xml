@@ -4,6 +4,7 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
     <!-- Wifi driver supports beacon protection for softap -->
     <bool translatable="false" name="config_vendor_softap_beacon_protection_supported">true</bool>
 
