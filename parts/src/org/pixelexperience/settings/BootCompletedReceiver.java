@@ -30,6 +30,7 @@ import org.pixelexperience.settings.display.ColorService;
 import org.pixelexperience.settings.dirac.DiracUtils;
 import org.pixelexperience.settings.dolby.DolbyUtils;
 import org.pixelexperience.settings.doze.DozeUtils;
+import org.pixelexperience.settings.doze.PocketService;
 import org.pixelexperience.settings.refreshrate.RefreshUtils;
 import org.pixelexperience.settings.thermal.ThermalUtils;
 
@@ -40,6 +41,8 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, Intent intent) {
+        if (!intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) return;
+
         if (DEBUG) Log.d(TAG, "Received boot completed intent");
 
         // Dolby Atmos
@@ -53,6 +56,9 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
         // Thermal Profiles
         ThermalUtils.startService(context);
+
+        // Pocket
+        PocketService.startService(context);
 
         // DisplayFeature
         ColorService.startService(context);
