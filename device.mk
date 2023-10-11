@@ -471,6 +471,12 @@ PRODUCT_PACKAGES += \
 # Shipping API
 PRODUCT_SHIPPING_API_LEVEL := 31
 
+# RIL
+PRODUCT_PACKAGES += \
+    Ims \
+    QtiTelephony \
+    qti-telephony-common
+
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
