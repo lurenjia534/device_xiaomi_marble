@@ -26,7 +26,6 @@ import android.view.Display.HdrCapabilities;
 import android.view.SurfaceControl;
 
 import org.pixelexperience.settings.camera.NfcCameraService;
-import org.pixelexperience.settings.display.ColorService;
 import org.pixelexperience.settings.dirac.DiracUtils;
 import org.pixelexperience.settings.dolby.DolbyUtils;
 import org.pixelexperience.settings.doze.DozeUtils;
@@ -59,9 +58,6 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
         // Pocket
         PocketService.startService(context);
-
-        // DisplayFeature
-        ColorService.startService(context);
 
         // NFC
         NfcCameraService.startService(context);
