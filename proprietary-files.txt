@@ -1398,6 +1398,7 @@ vendor/lib64/libsdr2hdr.so
 vendor/lib64/libsre.so
 vendor/lib64/libtruetone.so
 vendor/lib64/libvideomode.so
+vendor/lib64/vendor.xiaomi.hardware.displayfeature@1.0.so
 
 # Display HDR
 vendor/lib/libhdr_backlight_adapter.so
