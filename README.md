@@ -19,7 +19,7 @@ LTE_CA (frameworks_base)
 - https://github.com/AlphaDroid-Project/frameworks_base/commit/b8c21bfa2cc32dde70d3fc6f3bc860fcfbcdc2db
   
 Media (frameworks_av)
-- https://review.lineageos.org/c/LineageOS/android_frameworks_av/+/342862
+- https://github.com/lurenjia534/frameworks_av
 
 
 ## Device specifications
