@@ -2,8 +2,6 @@ attribute vendor_hal_camerapostproc_xiaomi;
 attribute vendor_hal_camerapostproc_xiaomi_client;
 attribute vendor_hal_camerapostproc_xiaomi_server;
 type vendor_hal_camerapostproc_xiaomi_hwservice, hwservice_manager_type;
-type hal_xiaomi_camera_hwservice, hwservice_type;
-
 
 allow vendor_hal_camerapostproc_xiaomi_client vendor_hal_camerapostproc_xiaomi_server:binder { call transfer };
 allow vendor_hal_camerapostproc_xiaomi_client vendor_hal_camerapostproc_xiaomi_server:binder transfer;
