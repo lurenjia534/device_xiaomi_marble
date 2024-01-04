@@ -18,7 +18,7 @@ android_app {
     overrides: ["MusicFX"],
     static_libs: [
         "androidx.core_core",
-        "org.lineageos.settings.resources",
+        "org.pixelexperience.settings.resources",
         "SettingsLib",
         "vendor.xiaomi.hardware.displayfeature-V1.0-java",
     ],
