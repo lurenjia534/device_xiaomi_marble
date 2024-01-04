@@ -65,25 +65,20 @@
 import /vendor/etc/init/hw/init.qti.kernel.rc
 import /vendor/etc/init/hw/init.mi_thermald.rc
 import /vendor/etc/init/hw/init.batterysecret.rc
-import /system/etc/init/init.factory.rc
-import /vendor/etc/init/init.charge_logger.rc
 
 on early-init
     write /proc/sys/kernel/printk_devkmsg ratelimited
     export MEMTAG_OPTIONS off
     write /dev/memcg/camera/provider/memory.soft_limit_in_bytes 36818038505472
 
+    # Start audio adsp rpc daemon at early init stage
+    start vendor.audioadsprpcd_audiopd
+
 on init
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     chown system system /sys/devices/platform/soc/1d84000.ufshc/auto_hibern8
     chmod 0660 /sys/devices/platform/soc/1d84000.ufshc/auto_hibern8
-    start logd
-
-    # Initial cpusets
-    #mkdir /dev/cpuset/foreground/boost
-    #copy /dev/cpuset/cpus /dev/cpuset/foreground/boost/cpus
-    #copy /dev/cpuset/mems /dev/cpuset/foreground/boost/mems
 
      # Initial cpuctl
     chmod 0666 /dev/cpuctl/background/cpu.shares
@@ -198,8 +193,11 @@ on post-fs-data
 on early-boot
     # Enable WLAN cold boot calibration
     write /sys/kernel/cnss/fs_ready 1
-    # Enable WLAN SSR recovery
-    write /sys/kernel/cnss/recovery 1
+    # SSR Setup
+    write /sys/class/remoteproc/remoteproc0/recovery enabled
+    write /sys/class/remoteproc/remoteproc1/recovery enabled
+    write /sys/class/remoteproc/remoteproc2/recovery enabled
+    write /sys/class/remoteproc/remoteproc3/recovery enabled
     start vendor.sensors
     verity_update_state
 
@@ -238,11 +236,6 @@ on boot
     chown system /sys/devices/system/cpu/hyp_core_ctl/hcc_min_freq
     #USB controller configuration
     setprop vendor.usb.controller a600000.dwc3
-
-    #chown/chmod input_suspend node
-    chown system system /sys/class/qcom-battery/input_suspend
-    chmod 774 /sys/class/qcom-battery/input_suspend
-
 
     # game plaid mode
     chown system system  /sys/devices/virtual/gpu_plaid/plaid/game_data
@@ -478,6 +471,8 @@ on property:sys.boot_completed=1
     write /sys/devices/virtual/thermal/thermal_message/sconfig 1
     enable vendor.qvirtmgr
     start  vendor.qvirtmgr
+    # Enable ZRAM on boot_complete
+    swapon_all /vendor/etc/fstab.qcom
 
 on post-fs-data
     chmod 0666 /dev/migt

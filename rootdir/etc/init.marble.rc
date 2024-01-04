@@ -22,6 +22,9 @@ on boot
     chown system system /sys/class/touch/touch_dev/palm_sensor
     chmod 0664 /sys/class/touch/touch_dev/palm_sensor
 
+    # Disable doze brightness handling
+    write /sys/devices/virtual/mi_display/disp_feature/disp-DSI-0/doze_brightness -1
+
 on post-fs
     chown system system /sys/class/backlight/panel0-backlight/brightness
     chown system system /sys/class/backlight/panel0-backlight/max_brightness
@@ -52,3 +55,37 @@ service citsensor-hal-2-0 /vendor/bin/hw/vendor.xiaomi.sensor.citsensorservice@2
     group system input wakelock
     override
     task_profiles ServiceCapacityLow
+
+service nqnfc_2_0_hal_service /vendor/bin/hw/vendor.nxp.hardware.nfc@2.0-service
+    class early_hal
+    user nfc
+    group nfc
+    override
+    disabled
+
+service secureelement-hal_1_2 /vendor/bin/hw/vendor.qti.secure_element@1.2-service
+    class early_hal
+    user system
+    group system
+    override
+    disabled
+
+service qti_esepowermanager_service_1_1 /vendor/bin/hw/vendor.qti.esepowermanager@1.1-service
+    class early_hal
+    user system
+    group nfc system
+    override
+    disabled
+
+service ssgqmigd /vendor/bin/ssgqmigd64
+    override
+    class late_start
+    user radio
+    group radio gps system
+    socket ssgqmig seqpacket 0660 radio inet
+
+# Do not enable NFC on marblein
+on property:ro.boot.product.hardware.sku=marble
+    enable nqnfc_2_0_hal_service
+    enable secureelement-hal_1_2
+    enable qti_esepowermanager_service_1_1
