@@ -1,14 +1,12 @@
 //
-// Copyright (C) 2017-2020 The LineageOS Project
+// Copyright (C) 2017-2021 The LineageOS Project
+//           (C) 2023 Paranoid Android
 //
 // SPDX-License-Identifier: Apache-2.0
 //
 
 android_app {
     name: "XiaomiParts",
-    defaults: [
-        "SettingsLibDefaults",
-    ],
 
     srcs: ["src/**/*.java"],
     resource_dirs: ["res"],
@@ -20,8 +18,8 @@ android_app {
     overrides: ["MusicFX"],
     static_libs: [
         "androidx.core_core",
-        "androidx.preference_preference",
-        "org.pixelexperience.settings.resources",
+        "org.lineageos.settings.resources",
+        "SettingsLib",
         "vendor.xiaomi.hardware.displayfeature-V1.0-java",
     ],
 
